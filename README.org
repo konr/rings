@@ -1,0 +1,45 @@
+* The only rings I care about are onion rings
+
+  The problem with /C-x b/ is that most buffers don't matter and you
+  need to spend some attention to filter them out.
+  
+  Keeping things in different tabs isn't also an ergonomic solution,
+  because you'll need a different set of tabs for each activity you do
+  inside Emacs, like editing code, editing server stuff, chatting on
+  IRC, etc.
+  
+  I used to solve this problem by having different virtual desktops
+  for different activities, but this doesn't work so smoothly on
+  MacOS, so I created this package to provide a similar workflow.
+
+* Suggested keybindings
+
+  Here's what I have in my /init.el/:
+
+#+BEGIN_SRC lisp
+(global-set-key (kbd "<f2>")   (rings-generate-cycler 2))
+(global-set-key (kbd "C-<f2>") (rings-generate-setter 2))
+(global-set-key (kbd "<f3>")   (rings-generate-cycler 3))
+(global-set-key (kbd "C-<f3>") (rings-generate-setter 3))
+(global-set-key (kbd "<f4>")   (rings-generate-cycler 4))
+(global-set-key (kbd "C-<f4>") (rings-generate-setter 4))
+#+END_SRC
+  
+* How does this work?
+  
+  Suppose you want to chat at Freenode's awesome /##latin/ channel
+  and at the same time not be too far from the latin dictionary
+  provided by [[http://github.com/konr/saaxy][SaaXy]]. You can add both buffers to the same ring.
+  
+  More common is having to edit multiple objects, each of which has
+  a model and views, which have little to do with other models and
+  views. In this case, with a few keystrokes you can add all the
+  buffers relative to each object to a different ring and both cycle among
+  the buffers of an object and among the different kinds
+
+  You can also ignore this ring thing and use the package just for
+  bookmarks. This is useful when you are editing many files from a
+  directory, and need a way to quickly return to it. Just add its
+  dired buffer to a ring and, no matter where you are, just press its
+  hotkey and you'll get back to it.
+
