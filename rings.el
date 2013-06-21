@@ -12,7 +12,7 @@
    (buffer-list)))
 
 (defun rings-cycle (key)
-  (let ((buffers (sort (mapcar #'buffer-name (rings-cycle key)) #'string<))
+  (let ((buffers (sort (mapcar #'buffer-name (rings-buffers key)) #'string<))
         (current (buffer-name (current-buffer))))
     (if (not buffers) (message "Empty group!")
       (loop for all = (append buffers buffers) then (cdr all)
@@ -38,3 +38,6 @@
 
 (defmacro rings-generate-cycler (key)
   `(lambda () (interactive) (rings-cycle ,key)))
+
+
+(provide 'rings)
