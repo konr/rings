@@ -36,7 +36,7 @@
   More common is having to edit multiple objects, each of which has a
   model and a view. You could add Object A's buffers to a ring, Object
   B's to another ring, all views to a third ring and all models to a
-  fourth. 
+  fourth. [[http://zombo.com/][Your imagination is the only limit]]!
 
   You can also ignore this ring thing and use the package just for
   bookmarks. This is useful when you are editing many files from a
