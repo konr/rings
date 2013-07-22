@@ -27,19 +27,20 @@
   
 * How does this work?
   
-  Suppose you want to chat at Freenode's awesome /##latin/ channel
-  and at the same time not be too far from the latin dictionary
-  provided by [[http://github.com/konr/saaxy][SaaXy]]. You can add both buffers to the same ring.
+  Suppose you want to chat at Freenode's awesome /##latin/ channel and
+  at the same time not be too far from the latin dictionary provided
+  by [[http://github.com/konr/saaxy][SaaXy]]. With the keybindings above, you can add both buffers to a
+  ring by pressing /C-<f2>/ inside each of them. Now, to cycle
+  between them, just press /<F2>/
   
-  More common is having to edit multiple objects, each of which has
-  a model and views, which have little to do with other models and
-  views. In this case, with a few keystrokes you can add all the
-  buffers relative to each object to a different ring and both cycle among
-  the buffers of an object and among the different kinds
+  More common is having to edit multiple objects, each of which has a
+  model and a view. You could add Object A's buffers to a ring, Object
+  B's to another ring, all views to a third ring and all models to a
+  fourth. [[http://zombo.com/][Your imagination is the only limit]]!
 
   You can also ignore this ring thing and use the package just for
   bookmarks. This is useful when you are editing many files from a
-  directory, and need a way to quickly return to it. Just add its
-  dired buffer to a ring and, no matter where you are, just press its
-  hotkey and you'll get back to it.
+  directory, and need a way to quickly return to it. I often use it
+  with dired, adding a key directory to the <f4> ring, to make it
+  available in a single keystroke.
 
