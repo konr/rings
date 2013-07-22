@@ -1,4 +1,4 @@
-;;; rings.el --- Buffer rings
+;;; rings.el --- Buffer rings. Like tabs, but better.
 
 ;; Copyright 2013 Konrad Scorciapino
 
