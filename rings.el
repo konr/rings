@@ -21,6 +21,18 @@
 ;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
 ;; Code goes here
+(require 'cl)
+
+
+(defmacro rings->> (x &optional form &rest more)
+  "Like clojure's ->>"
+  (if (null form) x
+    (if (null more)
+        (if (sequencep form)
+            `(,(car form) ,@(cdr form) ,x)
+          (list form x))
+      `(rings->> (rings->> ,x ,form) ,@more))))
+
 (defun rings-toggle-buffer (key)
   (let ((variable-name (intern (format "rings-%s" key))))
     (if (boundp variable-name)
@@ -43,8 +55,8 @@
             finally
             (let ((new (or (cadr all) (car buffers))))
               (switch-to-buffer (get-buffer new))
-              (->> buffers (mapcar (lambda (b)
-                                     (if (equal b new) (->> b list list (format "%s")) b
+              (rings->> buffers (mapcar (lambda (b)
+                                     (if (equal b new) (format "((%s))" b) b
                                         ; <taylanub> konr: I'm not sure if that's a good idea; the message-area is
                                         ;  supposed to print the object in an unambiguous way ...
                                         ;
