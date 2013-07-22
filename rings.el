@@ -1,3 +1,12 @@
+;;; rings.el --- Buffer rings
+
+;; Copyright 2013 Konrad Scorciapino
+
+;; Author: Konrad Scorciapino
+;; URL: http://github.com/konr/rings
+;; Version: 1.0.0
+
+;; Code goes here
 (defun rings-toggle-buffer (key)
   (let ((variable-name (intern (format "rings-%s" key))))
     (if (boundp variable-name)
@@ -41,3 +50,4 @@
 
 
 (provide 'rings)
+;;; rings.el ends here
