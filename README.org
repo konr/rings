@@ -1,4 +1,6 @@
 * The only rings I care about are onion rings
+  
+  *M-x package-install rings*
 
   The problem with /C-x b/ is that most buffers don't matter and you
   need to spend some attention to filter them out.
