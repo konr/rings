@@ -33,13 +33,27 @@
           (list form x))
       `(rings->> (rings->> ,x ,form) ,@more))))
 
+(defvar rings-used-rings '())
+
+(defun rings-add-buffer (key)
+  (let ((variable-name (intern (format "rings-%s" key))))
+    (unless (member variable-name rings-used-rings)
+      (add-to-list 'rings-used-rings variable-name))
+    (unless (boundp variable-name)
+      (set (make-local-variable variable-name) t)
+      (message "Added!"))))
+
+(defun rings-remove-buffer (key)
+  (let ((variable-name (intern (format "rings-%s" key))))
+    (when (boundp variable-name)
+    (kill-local-variable variable-name)
+    (message "Removed!"))))
+
 (defun rings-toggle-buffer (key)
   (let ((variable-name (intern (format "rings-%s" key))))
     (if (boundp variable-name)
-        (progn (kill-local-variable variable-name)
-               (message "Removed!"))
-      (progn (set (make-local-variable variable-name) t)
-             (message "Added!")))))
+        (rings-remove-buffer key)
+      (rings-add-buffer key))))
 
 (defun rings-buffers (key)
   (remove-if-not
@@ -68,8 +82,33 @@
                    (mapcar (lambda (x) (concat x " ")))
                    (apply #'concat) message))))))
 
-(defmacro rings-generate-setter (key)
+(defvar rings-protect-buffers-in-rings t)
+
+(defun rings-protect-buffer-handler ()
+  (if rings-protect-buffers-in-rings
+      (let ((killable t))
+        (mapc
+         (lambda (ring)
+           (when  (boundp ring)
+             (setq killable nil)))
+         rings-used-rings)
+        (unless killable
+          (previous-buffer))
+        killable)
+    t))
+
+(add-hook 'kill-buffer-query-functions 'rings-protect-buffer-handler)
+
+(defmacro rings-generate-toggler (key)
   `(lambda () (interactive) (rings-toggle-buffer ,key)))
+
+(defalias 'rings-generate-setter 'rings-generate-toggler)
+
+(defmacro rings-generate-adder (key)
+  `(lambda () (interactive) (rings-add-buffer ,key)))
+
+(defmacro rings-generate-remover (key)
+  `(lambda () (interactive) (rings-remove-buffer ,key)))
 
 (defmacro rings-generate-cycler (key)
   `(lambda () (interactive) (rings-cycle ,key)))
