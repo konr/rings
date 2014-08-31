@@ -99,17 +99,22 @@
 
 (add-hook 'kill-buffer-query-functions 'rings-protect-buffer-handler)
 
+;;;###autoload
 (defmacro rings-generate-toggler (key)
   `(lambda () (interactive) (rings-toggle-buffer ,key)))
 
+;;;###autoload
 (defalias 'rings-generate-setter 'rings-generate-toggler)
 
+;;;###autoload
 (defmacro rings-generate-adder (key)
   `(lambda () (interactive) (rings-add-buffer ,key)))
 
+;;;###autoload
 (defmacro rings-generate-remover (key)
   `(lambda () (interactive) (rings-remove-buffer ,key)))
 
+;;;###autoload
 (defmacro rings-generate-cycler (key)
   `(lambda () (interactive) (rings-cycle ,key)))
 
